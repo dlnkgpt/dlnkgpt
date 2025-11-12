@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  api:
+    build:
+      context: ../backend_api
+      dockerfile: Dockerfile
+    container_name: dlnkgpt-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the fine-tuned model directory
+      - ../model_finetuning/dlnkgpt-model:/app/dlnkgpt-model:ro
+      # Mount logs directory
+      - ./logs:/app/logs
+    environment:
+      - MODEL_PATH=/app/dlnkgpt-model
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - dlnkgpt-network
+    # Uncomment below if you have GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:latest
+    container_name: dlnkgpt-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../frontend_ui:/usr/share/nginx/html:ro
+      # Uncomment below for SSL certificates
+      # - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - dlnkgpt-network
+
+networks:
+  dlnkgpt-network:
+    driver: bridge
+
+volumes:
+  logs:
