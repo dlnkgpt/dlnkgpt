@@ -1,7 +1,4 @@
 # dLNk GPT - Complete Implementation
-
-**⚠️ DISCLAIMER: This project is for educational and research purposes only. Creating or deploying uncensored AI systems may be illegal and unethical. Use at your own risk.**
-
 ## Overview
 
 dLNk GPT is a complete implementation of an uncensored AI chat service based on GPT-J-6B. This repository contains all the necessary code, scripts, and configurations to:
@@ -250,41 +247,6 @@ The model is cached in `cached_model/` directory to avoid re-downloading. To cle
 rm -rf model_finetuning/cached_model
 ```
 
-## Security Considerations
-
-⚠️ **Important Security Notes:**
-
-1. **Change default API keys** in production
-2. **Use HTTPS** for production deployment
-3. **Implement rate limiting** to prevent abuse
-4. **Use environment variables** for sensitive data
-5. **Regularly update** dependencies for security patches
-
-## Legal and Ethical Considerations
-
-This project demonstrates the technical implementation of an uncensored AI system. However:
-
-- Creating systems without content filtering may violate laws in many jurisdictions
-- Generated content may be harmful, illegal, or unethical
-- Deploying such systems may result in legal liability
-- This project is for **educational purposes only**
-
-**We strongly recommend:**
-- Using this code only for research and learning
-- Implementing proper content filtering in any production system
-- Consulting legal experts before deployment
-- Following ethical AI principles and guidelines
-
-## Contributing
-
-This is an educational project. Contributions should focus on:
-
-- Improving documentation
-- Fixing bugs
-- Optimizing performance
-- Adding safety features
-
-## License
 
 This project is provided as-is for educational purposes. Use at your own risk.
 
